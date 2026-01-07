@@ -1,0 +1,30 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: cert-manager-repo
+  releaseName: cert-manager
+  maxHistory: 5
+  timeout: 5m
+  install:
+    remediation:
+      retries: 1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 1
+      remediateLastFailure: true
+      strategy: rollback
+  values:
+    crds:
+      keep: true
+      enabled: true
+    config:
+      apiVersion: controller.config.cert-manager.io/v1alpha1
+      kind: ControllerConfiguration
+      enableGatewayAPI: true

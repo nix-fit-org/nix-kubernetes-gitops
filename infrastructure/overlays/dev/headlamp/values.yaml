@@ -1,0 +1,42 @@
+---
+
+replicaCount: 1
+
+config:
+  oidc:
+    clientID: "infra"
+    issuerURL: "https://auth-infra.nix-fit.ru/realms/infra"
+    scopes: "email,groups"
+    usePKCE: true
+    secret:
+      name: headlamp-oidc
+  pluginsDir: /build/plugins
+
+initContainers:
+  - command:
+      - /bin/sh
+      - -c
+      - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/
+    image: ghcr.io/headlamp-k8s/headlamp-plugin-flux:v0.5.0
+    imagePullPolicy: Always
+    name: headlamp-plugins
+    volumeMounts:
+      - mountPath: /build/plugins
+        name: headlamp-plugins
+volumeMounts:
+  - mountPath: /build/plugins
+    name: headlamp-plugins
+volumes:
+  - name: headlamp-plugins
+    emptyDir:
+      size: 32Mi
+
+service:
+  port: 8080
+
+podDisruptionBudget:
+  enabled: true
+  maxUnavailable: 1
+
+clusterRoleBinding:
+  create: false

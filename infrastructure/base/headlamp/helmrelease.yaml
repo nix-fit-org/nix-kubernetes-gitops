@@ -1,0 +1,29 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: headlamp
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: headlamp
+      sourceRef:
+        kind: HelmRepository
+        name: headlamp-repo
+      version: "0.39.0"
+  releaseName: headlamp
+  maxHistory: 5
+  timeout: 5m
+  install:
+    remediation:
+      retries: 1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 1
+      remediateLastFailure: true
+      strategy: rollback
+  dependsOn:
+    - name: envoy-gateway
+      namespace: envoy-gateway-system

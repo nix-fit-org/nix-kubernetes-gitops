@@ -1,0 +1,64 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: headlamp-redirect
+spec:
+  hostnames:
+  - headlamp-dev.nix-fit.ru
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: envoy-gateway
+    namespace: envoy-gateway-system
+    sectionName: http-80
+  rules:
+  - filters:
+    - requestRedirect:
+        port: 443
+        scheme: https
+        statusCode: 301
+      type: RequestRedirect
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: headlamp
+spec:
+  hostnames:
+  - headlamp-dev.nix-fit.ru
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: envoy-gateway
+    namespace: envoy-gateway-system
+    sectionName: https-headlamp-443
+  rules:
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: headlamp
+      port: 8080
+      weight: 1
+    filters:
+    - responseHeaderModifier:
+        set:
+        - name: Content-Security-Policy
+          value: frame-src 'self'; frame-ancestors 'self'; object-src 'none';
+        - name: Referrer-Policy
+          value: no-referrer
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+      type: ResponseHeaderModifier
+    matches:
+    - path:
+        type: PathPrefix
+        value: /

@@ -1,0 +1,110 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: buildkitd
+  labels:
+    app: buildkitd
+spec:
+  serviceName: buildkitd
+  replicas: 3
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: buildkitd
+  template:
+    metadata:
+      labels:
+        app: buildkitd
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - buildkitd
+              topologyKey: kubernetes.io/hostname
+      serviceAccount: buildkit
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: Unconfined
+        appArmorProfile:
+          type: Unconfined
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+      containers:
+        - name: buildkitd
+          image: nix-docker.registry.twcstorage.ru/ci/buildkit/buildkit:v0.24.0-rootless@sha256:3096cb2e2e761a7cebfe259660990a3c11f738891e712d35d1112b8ddd7582fa
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+              ephemeral-storage: 15Gi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+              ephemeral-storage: 15Gi
+          args:
+            - --addr
+            - tcp://0.0.0.0:1234
+            - --oci-worker-no-process-sandbox
+            - --containerd-worker
+            - "false"
+            - --config=/etc/buildkit/buildkitd.toml
+          ports:
+            - name: tcp-1234
+              containerPort: 1234
+          env:
+            - name: BUILDKIT_HOST
+              value: tcp://127.0.0.1:1234
+          readinessProbe:
+            exec:
+              command:
+                - buildctl
+                - debug
+                - workers
+            initialDelaySeconds: 5
+            periodSeconds: 30
+          livenessProbe:
+            exec:
+              command:
+                - buildctl
+                - debug
+                - workers
+            initialDelaySeconds: 5
+            periodSeconds: 30
+          securityContext:
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: run
+              mountPath: /run/user/1000
+            - name: tmp
+              mountPath: /home/user/.local/tmp
+            - name: init-tmp
+              mountPath: /tmp
+            - name: data
+              mountPath: /home/user/.local/share/buildkit
+            - name: buildkitd-config
+              mountPath: /etc/buildkit
+              readOnly: true
+      volumes:
+        - name: run
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+        - name: init-tmp
+          emptyDir: {}
+        - name: data
+          emptyDir:
+            sizeLimit: 15Gi
+        - name: buildkitd-config
+          configMap:
+            name: buildkitd-config

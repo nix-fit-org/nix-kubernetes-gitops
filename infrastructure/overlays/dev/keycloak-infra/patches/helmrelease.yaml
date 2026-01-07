@@ -1,0 +1,19 @@
+---
+- op: replace
+  path: /metadata/name
+  value: keycloak-infra
+- op: replace
+  path: /spec/releaseName
+  value: keycloak-infra
+- op: replace
+  path: /spec/chartRef/name
+  value: keycloak-infra-repo
+- op: add
+  path: /spec/valuesFrom
+  value:
+    - kind: ConfigMap
+      name: keycloak-infra-values
+      valuesKey: values.yaml
+    - kind: Secret
+      name: keycloak-infra-secrets-values
+      valuesKey: secrets.values.yaml

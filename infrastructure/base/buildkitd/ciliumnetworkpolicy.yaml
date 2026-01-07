@@ -1,0 +1,24 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: buildkitd-allow
+spec:
+  endpointSelector:
+    matchLabels:
+      app: buildkitd
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: ci
+      toPorts:
+        - ports:
+            - port: "1234"
+              protocol: TCP
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: buildkit
+      toPorts:
+        - ports:
+            - port: "1234"
+              protocol: TCP

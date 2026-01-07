@@ -1,0 +1,40 @@
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: FluxInstance
+metadata:
+  annotations:
+    fluxcd.controlplane.io/reconcile: enabled
+    fluxcd.controlplane.io/reconcileEvery: 1h
+    fluxcd.controlplane.io/reconcileTimeout: 5m
+  name: flux
+  namespace: flux-system
+spec:
+  cluster:
+    domain: cluster.local
+    multitenant: false
+    multitenantWorkloadIdentity: false
+    networkPolicy: true
+    size: medium
+    type: kubernetes
+  components:
+    - source-controller
+    - kustomize-controller
+    - helm-controller
+    - notification-controller
+    - image-reflector-controller
+    - image-automation-controller
+    - source-watcher
+  distribution:
+    artifact: oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests
+    registry: ghcr.io/fluxcd
+    version: 2.x
+  migrateResources: true
+  sync:
+    interval: 5m
+    kind: GitRepository
+    name: nix-kubernetes-gitops
+    path: ./clusters/dev
+    pullSecret: nix-kubernetes-gitops-ssh
+    ref: refs/heads/main
+    url: ssh://git@github.com/nix-fit/nix-kubernetes-gitops.git
+  wait: true

@@ -1,0 +1,26 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: headlamp
+resources:
+  - ../../../base/headlamp
+  - httproute.yaml
+configMapGenerator:
+  - name: headlamp-values
+    namespace: headlamp
+    files:
+      - values.yaml
+secretGenerator:
+  - name: headlamp-secrets-values
+    namespace: headlamp
+    files:
+      - secrets.values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    reconcile.fluxcd.io/watch: Enabled
+patches:
+  - target:
+      kind: HelmRelease
+      name: headlamp
+    path: patches/helmrelease.yaml

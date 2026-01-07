@@ -1,0 +1,29 @@
+---
+# Customize Envoy dataplane Deployment
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: envoy-proxy-config
+spec:
+  provider:
+    kubernetes:
+      envoyDeployment:
+        name: envoy-proxy
+        replicas: 3
+        strategy:
+          rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 1
+          type: RollingUpdate
+      envoyPDB:
+        maxUnavailable: 1
+        name: envoy-proxy
+      envoyService:
+        externalTrafficPolicy: Local
+        name: envoy-proxy
+        type: LoadBalancer
+        labels:
+          k8s.timeweb.cloud/attached-loadbalancer-proxy-enable: "true"
+      envoyServiceAccount:
+        name: envoy-proxy
+    type: Kubernetes

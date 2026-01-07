@@ -1,0 +1,12 @@
+---
+# Enable proxy protocol
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: envoy-proxy-client-ip
+spec:
+  enableProxyProtocol: true
+  targetRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: envoy-gateway

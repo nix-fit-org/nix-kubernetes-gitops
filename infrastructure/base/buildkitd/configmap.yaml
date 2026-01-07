@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: buildkitd-config
+data:
+  buildkitd.toml: |
+    [worker.oci]
+      enabled = true
+      gc = true
+    [[worker.oci.gcpolicy]]
+      reservedSpace = "15GB"
+      maxUsedSpace  = "12GB"
+      minFreeSpace  = "3GB"

@@ -1,0 +1,55 @@
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: Gateway
+metadata:
+  name: envoy-gateway
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  gatewayClassName: envoy-gateway
+  listeners:
+  - allowedRoutes:
+      namespaces:
+        from: All
+    name: http-80
+    port: 80
+    protocol: HTTP
+  - allowedRoutes:
+      namespaces:
+        from: All
+    name: https-keycloak-infra-443
+    hostname: auth-infra.nix-fit.ru
+    port: 443
+    protocol: HTTPS
+    tls:
+      certificateRefs:
+      - group: ''
+        kind: Secret
+        name: keycloak-infra-envoy-gateway-tls
+      mode: Terminate
+  - allowedRoutes:
+      namespaces:
+        from: All
+    name: https-keycloak-443
+    hostname: auth-dev.nix-fit.ru
+    port: 443
+    protocol: HTTPS
+    tls:
+      certificateRefs:
+      - group: ''
+        kind: Secret
+        name: keycloak-envoy-gateway-tls
+      mode: Terminate
+  - allowedRoutes:
+      namespaces:
+        from: All
+    name: https-headlamp-443
+    hostname: headlamp-dev.nix-fit.ru
+    port: 443
+    protocol: HTTPS
+    tls:
+      certificateRefs:
+      - group: ''
+        kind: Secret
+        name: headlamp-envoy-gateway-tls
+      mode: Terminate
