@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./namespaces
   - ./rbac
+  - ./local-path-provisioner
   - ./cert-manager
   - ./envoy-gateway
   - ./keycloak-infra
