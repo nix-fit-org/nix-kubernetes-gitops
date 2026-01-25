@@ -5,6 +5,7 @@ resources:
   - ./namespaces
   - ./rbac
   - ./local-path-provisioner
+  - ./valkey
   - ./cert-manager
   - ./envoy-gateway
   - ./keycloak-infra

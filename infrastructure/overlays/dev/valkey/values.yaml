@@ -1,0 +1,42 @@
+---
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+initResources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+auth:
+  enabled: true
+
+replica:
+  enabled: true
+  replicas: 2
+  replicationUser: replication
+  minReplicasToWrite: 1
+  persistence:
+    size: "3Gi"
+    storageClass: local-path
+
+dataStorage:
+  enabled: true
+  requestedSize: "3Gi"
+  className: local-path
+
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: valkey
