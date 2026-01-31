@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./namespaces
   - ./rbac
+  - ./flux-operator
   - ./local-path-provisioner
   - ./valkey
   - ./cert-manager
