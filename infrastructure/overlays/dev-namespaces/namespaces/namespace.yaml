@@ -7,11 +7,6 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: reflector
----
-apiVersion: v1
-kind: Namespace
-metadata:
   name: local-path-provisioner
 ---
 apiVersion: v1

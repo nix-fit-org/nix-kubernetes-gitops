@@ -1,0 +1,4 @@
+---
+- op: replace
+  path: /spec/ref/tag
+  value: "0.40.0"
