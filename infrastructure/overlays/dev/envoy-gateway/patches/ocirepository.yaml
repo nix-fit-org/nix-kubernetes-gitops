@@ -1,4 +1,0 @@
----
-- op: replace
-  path: /spec/ref/tag
-  value: "v1.6.1"
