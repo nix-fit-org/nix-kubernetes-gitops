@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: nix-kubernetes-gitops
-  path: ./infrastructure/overlays/dev-namespaces
+  path: ./infrastructure/overlays/dev/namespaces
   prune: true
   wait: true
   decryption:
@@ -27,7 +27,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: nix-kubernetes-gitops
-  path: ./infrastructure/overlays/dev-rbac
+  path: ./infrastructure/overlays/dev/rbac
   prune: true
   wait: true
   decryption:
@@ -47,7 +47,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: nix-kubernetes-gitops
-  path: ./infrastructure/overlays/dev-base-operators
+  path: ./infrastructure/overlays/dev/base-operators
   prune: true
   wait: true
   timeout: 10m
@@ -68,7 +68,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: nix-kubernetes-gitops
-  path: ./infrastructure/overlays/dev-operators
+  path: ./infrastructure/overlays/dev/operators
   prune: true
   wait: true
   timeout: 10m
@@ -89,7 +89,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: nix-kubernetes-gitops
-  path: ./infrastructure/overlays/dev
+  path: ./infrastructure/overlays/dev/services
   prune: true
   wait: true
   timeout: 10m
