@@ -7,7 +7,7 @@ spec:
   interval: 1h
   url: oci://nix-docker.registry.twcstorage.ru/helm/charts/keycloak
   ref:
-    tag: "1.2.1"
+    tag: "1.2.1" # {"$imagepolicy": "flux-system:keycloak-chart-release:tag"}
   secretRef:
     name: nix-docker-oci
   layerSelector:

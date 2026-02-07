@@ -26,4 +26,5 @@ patches:
   - target:
       kind: OCIRepository
       name: keycloak-repo
-    path: patches/ocirepository.yaml
+    path: patches/ocirepository-name.yaml
+  - path: patches/ocirepository.yaml

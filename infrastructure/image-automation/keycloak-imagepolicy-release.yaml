@@ -1,0 +1,11 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: keycloak-chart-release
+spec:
+  imageRepositoryRef:
+    name: keycloak-chart
+  policy:
+    semver:
+      range: ">=1.0.0 <2.0.0"

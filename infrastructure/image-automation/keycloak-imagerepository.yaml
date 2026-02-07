@@ -1,0 +1,10 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: keycloak-chart
+spec:
+  image: nix-docker.registry.twcstorage.ru/helm/charts/keycloak
+  interval: 5m
+  secretRef:
+    name: nix-docker-oci

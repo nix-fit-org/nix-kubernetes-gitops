@@ -1,7 +1,8 @@
 ---
-- op: replace
-  path: /metadata/name
-  value: keycloak-infra-repo
-- op: replace
-  path: /spec/ref/tag
-  value: "1.2.1"
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: keycloak-repo
+spec:
+  ref:
+    tag: "1.2.1" # {"$imagepolicy": "flux-system:keycloak-chart-latest:tag"}

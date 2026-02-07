@@ -23,7 +23,4 @@ patches:
       kind: HelmRelease
       name: keycloak
     path: patches/helmrelease.yaml
-  - target:
-      kind: OCIRepository
-      name: keycloak-repo
-    path: patches/ocirepository.yaml
+  - path: patches/ocirepository.yaml
