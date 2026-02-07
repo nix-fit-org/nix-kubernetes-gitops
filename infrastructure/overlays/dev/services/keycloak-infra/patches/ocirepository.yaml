@@ -1,8 +1,7 @@
----
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
   name: keycloak-repo
 spec:
   ref:
-    tag: "1.2.1" # {"$imagepolicy": "flux-system:keycloak-chart-latest:tag"}
+    tag: "1.2.2" # {"$imagepolicy": "flux-system:keycloak-chart-latest:tag"}
