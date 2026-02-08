@@ -1,0 +1,25 @@
+---
+
+replicaCount: 1
+
+gateway:
+  enabled: true
+  httpRoute:
+    host: dev.nix-fit.ru
+    filters:
+      responseHeaderModifier:
+        set:
+        - name: Content-Security-Policy
+          value: frame-src 'self' https://www.youtube.com https://youtube.com https://youtu.be https://www.youtube-nocookie.com; frame-ancestors 'self'; object-src 'none';
+        - name: Referrer-Policy
+          value: strict-origin-when-cross-origin
+        - name: Strict-Transport-Security
+          value: max-age=31536000; includeSubDomains
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: X-Frame-Options
+          value: SAMEORIGIN
+
+app:
+  env:
+    ORIGIN: https://dev.nix-fit.ru

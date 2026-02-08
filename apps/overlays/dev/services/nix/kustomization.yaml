@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: frontend
+resources:
+  - ../../../../base/frontend/nix
+configMapGenerator:
+  - name: nix-values
+    namespace: frontend
+    files:
+      - values.yaml
+secretGenerator:
+  - name: nix-secrets-values
+    namespace: frontend
+    files:
+      - secrets.values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    reconcile.fluxcd.io/watch: Enabled
+patches:
+  - path: patches/helmrelease.yaml
+  - path: patches/ocirepository.yaml

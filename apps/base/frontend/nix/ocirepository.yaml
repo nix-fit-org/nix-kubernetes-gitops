@@ -1,0 +1,14 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: nix-chart-repo
+spec:
+  interval: 1h
+  url: oci://nix-docker.registry.twcstorage.ru/helm/apps/front/nix
+  ref:
+    tag: "0.0.1000-snapshot" # {"$imagepolicy": "flux-system:nix-chart-release:tag"}
+  secretRef:
+    name: nix-docker-oci
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy

@@ -53,3 +53,16 @@ spec:
         kind: Secret
         name: headlamp-envoy-gateway-tls
       mode: Terminate
+  - allowedRoutes:
+      namespaces:
+        from: All
+    name: https-nix-443
+    hostname: dev.nix-fit.ru
+    port: 443
+    protocol: HTTPS
+    tls:
+      certificateRefs:
+      - group: ''
+        kind: Secret
+        name: nix-envoy-gateway-tls
+      mode: Terminate

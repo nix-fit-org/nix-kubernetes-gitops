@@ -1,0 +1,10 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: nix-chart
+spec:
+  image: nix-docker.registry.twcstorage.ru/helm/apps/front/nix
+  interval: 5m
+  secretRef:
+    name: nix-docker-oci

@@ -1,0 +1,11 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: nix-chart-release
+spec:
+  imageRepositoryRef:
+    name: nix-chart
+  policy:
+    semver:
+      range: ">=0.0.1000 <1.0.0000"
