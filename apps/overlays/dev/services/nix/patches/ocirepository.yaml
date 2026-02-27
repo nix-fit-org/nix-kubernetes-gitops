@@ -1,8 +1,7 @@
----
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
   name: nix-chart-repo
 spec:
   ref:
-    tag: "0.0.1000-snapshot" # {"$imagepolicy": "flux-system:nix-chart-latest:tag"}
+    tag: "0.0.1000" # {"$imagepolicy": "flux-system:nix-chart-latest:tag"}
