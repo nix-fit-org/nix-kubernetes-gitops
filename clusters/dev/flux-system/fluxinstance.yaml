@@ -27,7 +27,7 @@ spec:
   distribution:
     artifact: oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests
     registry: ghcr.io/fluxcd
-    version: 2.x
+    version: 2.8.x
   migrateResources: true
   sync:
     interval: 5m
