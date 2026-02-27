@@ -4,4 +4,4 @@ metadata:
   name: keycloak-repo
 spec:
   ref:
-    tag: "1.2.2" # {"$imagepolicy": "flux-system:keycloak-chart-latest:tag"}
+    tag: "1.2.3" # {"$imagepolicy": "flux-system:keycloak-chart-latest:tag"}
