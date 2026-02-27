@@ -4,7 +4,22 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - ../../../../base/flux-operator
+  - httproute.yaml
   - secret.yaml
+configMapGenerator:
+  - name: flux-operator-values
+    namespace: flux-system
+    files:
+      - values.yaml
+secretGenerator:
+  - name: flux-operator-secrets-values
+    namespace: flux-system
+    files:
+      - secrets.values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    reconcile.fluxcd.io/watch: Enabled
 commonAnnotations:
   kustomize.toolkit.fluxcd.io/prune: "disabled"
 patches:
@@ -12,3 +27,7 @@ patches:
       kind: OCIRepository
       name: flux-operator-repo
     path: patches/ocirepository.yaml
+  - target:
+      kind: HelmRelease
+      name: flux-operator
+    path: patches/helmrelease.yaml

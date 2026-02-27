@@ -56,6 +56,19 @@ spec:
   - allowedRoutes:
       namespaces:
         from: All
+    name: https-flux-operator-443
+    hostname: flux-dev.nix-fit.ru
+    port: 443
+    protocol: HTTPS
+    tls:
+      certificateRefs:
+      - group: ''
+        kind: Secret
+        name: flux-operator-envoy-gateway-tls
+      mode: Terminate
+  - allowedRoutes:
+      namespaces:
+        from: All
     name: https-nix-443
     hostname: dev.nix-fit.ru
     port: 443

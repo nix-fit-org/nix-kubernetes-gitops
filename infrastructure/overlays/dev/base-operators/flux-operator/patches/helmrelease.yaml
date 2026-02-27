@@ -1,0 +1,10 @@
+---
+- op: add
+  path: /spec/valuesFrom
+  value:
+    - kind: ConfigMap
+      name: flux-operator-values
+      valuesKey: values.yaml
+    - kind: Secret
+      name: flux-operator-secrets-values
+      valuesKey: secrets.values.yaml
