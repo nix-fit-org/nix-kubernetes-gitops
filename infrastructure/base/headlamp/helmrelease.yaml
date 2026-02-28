@@ -11,7 +11,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: headlamp-repo
-      version: "0.39.0"
+      version: "0.40.0"
   releaseName: headlamp
   maxHistory: 5
   timeout: 5m

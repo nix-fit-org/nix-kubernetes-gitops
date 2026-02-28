@@ -2,6 +2,9 @@
 
 replicaCount: 1
 
+image:
+  tag: v0.40.1
+
 config:
   oidc:
     clientID: "infra"
