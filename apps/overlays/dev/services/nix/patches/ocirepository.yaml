@@ -4,4 +4,4 @@ metadata:
   name: nix-chart-repo
 spec:
   ref:
-    tag: "0.0.1000" # {"$imagepolicy": "flux-system:nix-chart-latest:tag"}
+    tag: "0.0.2000" # {"$imagepolicy": "flux-system:nix-chart-latest:tag"}
