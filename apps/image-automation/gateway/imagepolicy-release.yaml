@@ -1,0 +1,11 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: gateway-chart-release
+spec:
+  imageRepositoryRef:
+    name: gateway-chart
+  policy:
+    semver:
+      range: ">=1.0.0000 <2.0.0000"
