@@ -6,7 +6,7 @@ spec:
   interval: 1h
   url: oci://nix-docker.registry.twcstorage.ru/helm/apps/back/gateway
   ref:
-    tag: "1.0.0002" # {"$imagepolicy": "flux-system:gateway-chart-release:tag"}
+    tag: "1.0.0003" # {"$imagepolicy": "flux-system:gateway-chart-release:tag"}
   secretRef:
     name: nix-docker-oci
   layerSelector:
