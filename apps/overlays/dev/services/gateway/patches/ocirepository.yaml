@@ -4,4 +4,4 @@ metadata:
   name: gateway-chart-repo
 spec:
   ref:
-    tag: "1.0.0000-snapshot" # {"$imagepolicy": "flux-system:gateway-chart-latest:tag"}
+    tag: "1.0.0002" # {"$imagepolicy": "flux-system:gateway-chart-latest:tag"}
