@@ -17,13 +17,19 @@ spec:
         name: fluxcdbot
         email: fluxcdbot@users.noreply.github.com
       messageTemplate: |
-        chore: update image versions
+        chore(images): automated update [skip ci]
 
-        {{ range $resource, $changes := .Changed.Objects -}}
-        - {{ $resource.Kind }}/{{ $resource.Name }}:
-        {{- range $_, $change := $changes }}
-          {{ $change.OldValue }} -> {{ $change.NewValue }}
-        {{- end }}
+        Automation: {{ .AutomationObject }}
+
+        Changes:
+        {{ range $filename, $objects := .Changed.FileChanges -}}
+        - {{ $filename }}
+        {{- range $resource, $changes := $objects }}
+          {{ $resource.Kind }}/{{ $resource.Name }}:
+          {{- range $_, $change := $changes }}
+            {{ $change.OldValue }} -> {{ $change.NewValue }} (policy: {{ index (splitList ":" $change.Setter) 1 }})
+          {{- end }}
+        {{ end }}
         {{ end -}}
     push:
       branch: main
