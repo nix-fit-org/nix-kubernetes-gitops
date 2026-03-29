@@ -34,4 +34,3 @@ spec:
   wait: true
   dependsOn:
     - name: dev-infrastructure
-    - name: dev-apps

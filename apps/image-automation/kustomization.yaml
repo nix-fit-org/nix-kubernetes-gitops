@@ -6,7 +6,6 @@ resources:
   - imageupdateautomation.yaml
   - ./nix/imagerepository.yaml
   - ./nix/imagepolicy-release.yaml
-  - ./nix/imagepolicy-latest.yaml
   - ./gateway/imagerepository.yaml
   - ./gateway/imagepolicy-release.yaml
   - ./gateway/imagepolicy-latest.yaml
