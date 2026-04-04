@@ -1,7 +1,7 @@
 ---
 - op: replace
   path: /spec/chart/spec/version
-  value: "0.40.0"
+  value: "0.41.0"
 - op: add
   path: /spec/valuesFrom
   value:
