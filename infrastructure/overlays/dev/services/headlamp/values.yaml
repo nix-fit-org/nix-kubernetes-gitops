@@ -29,7 +29,7 @@ volumeMounts:
 volumes:
   - name: headlamp-plugins
     emptyDir:
-      size: 32Mi
+      sizeLimit: 32Mi
 
 service:
   port: 8080
