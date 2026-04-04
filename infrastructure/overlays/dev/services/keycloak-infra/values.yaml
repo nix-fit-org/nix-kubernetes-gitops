@@ -8,4 +8,4 @@ gateway:
 app:
   env:
     KC_HOSTNAME: auth-infra.nix-fit.ru
-    KC_DB_URL: jdbc:postgresql://e927970eef65f16b19d9f818.twc1.net:5432/keycloak_infra_db?sslmode=verify-full&sslrootcert=/etc/ssl/db-ca.crt
+    KC_DB_URL: jdbc:postgresql://c6e13dfb73a667b8fc9a6a90.twc1.net:5432/keycloak_infra_db?sslmode=verify-full&sslrootcert=/etc/ssl/db-ca.crt
