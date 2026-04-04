@@ -1,8 +1,0 @@
----
-
-replicaCount: 1
-
-app:
-  env:
-    RabbitMQ__Host: rabbitmq.rabbitmq-system.svc.cluster.local
-    ASPNETCORE_ENVIRONMENT: Development

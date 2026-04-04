@@ -17,16 +17,6 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: rabbitmq-system
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: valkey
----
-apiVersion: v1
-kind: Namespace
-metadata:
   name: cert-manager
 ---
 apiVersion: v1

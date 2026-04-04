@@ -3,16 +3,16 @@ kind: ClusterRole
 metadata:
   name: nix-admin
 rules:
-- apiGroups:
-  - '*'
-  resources:
-  - '*'
-  verbs:
-  - '*'
-- nonResourceURLs:
-  - '*'
-  verbs:
-  - '*'
+  - apiGroups:
+      - '*'
+    resources:
+      - '*'
+    verbs:
+      - '*'
+  - nonResourceURLs:
+      - '*'
+    verbs:
+      - '*'
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
@@ -98,3 +98,48 @@ rules:
     resources:
       - orders
       - challenges
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: flux-dev-reconciler
+rules:
+  - apiGroups:
+      - image.toolkit.fluxcd.io
+    resources:
+      - imagerepositories
+      - imagepolicies
+      - imageupdateautomations
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+  - apiGroups:
+      - source.toolkit.fluxcd.io
+    resources:
+      - ocirepositories
+      - gitrepositories
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+  - apiGroups:
+      - kustomize.toolkit.fluxcd.io
+    resources:
+      - kustomizations
+    verbs:
+      - get
+      - list
+      - patch
+      - update
+  - apiGroups:
+      - helm.toolkit.fluxcd.io
+    resources:
+      - helmreleases
+    verbs:
+      - get
+      - list
+      - patch
+      - update

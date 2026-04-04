@@ -5,5 +5,4 @@ resources:
   - ./flux-operator
   - ./cert-manager
   - ./local-path-provisioner
-  - ./rabbitmq-operator
   - ./reflector

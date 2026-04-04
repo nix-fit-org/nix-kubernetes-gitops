@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - clusterrole.yaml
   - clusterrolebinding.yaml
+  - serviceaccount.yaml
 commonAnnotations:
   kustomize.toolkit.fluxcd.io/prune: "disabled"
