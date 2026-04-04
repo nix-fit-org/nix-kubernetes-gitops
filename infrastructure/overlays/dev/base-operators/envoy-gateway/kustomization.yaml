@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: envoy-gateway-system
 resources:
   - ../../../../base/envoy-gateway
-  - gateway.yaml
 commonAnnotations:
   kustomize.toolkit.fluxcd.io/prune: "disabled"
 configMapGenerator:

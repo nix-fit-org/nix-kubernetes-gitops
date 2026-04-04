@@ -5,4 +5,3 @@ namespace: cert-manager
 resources:
   - ocirepository.yaml
   - helmrelease.yaml
-  - clusterissuer.yaml

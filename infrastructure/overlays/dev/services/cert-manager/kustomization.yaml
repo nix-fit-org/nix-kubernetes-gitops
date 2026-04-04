@@ -1,7 +1,6 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: envoy-gateway-system
+namespace: cert-manager
 resources:
-  - ocirepository.yaml
-  - helmrelease.yaml
+  - clusterissuer.yaml
