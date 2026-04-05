@@ -2,7 +2,6 @@
 
 replicaCount: 1
 
-
 app:
   migrations:
     enabled: true

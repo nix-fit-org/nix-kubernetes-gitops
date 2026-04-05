@@ -79,3 +79,16 @@ spec:
         kind: Secret
         name: nix-envoy-gateway-tls
       mode: Terminate
+  - allowedRoutes:
+      namespaces:
+        from: All
+    name: https-mobilebff-443
+    hostname: mobilebff-dev.nix-fit.ru
+    port: 443
+    protocol: HTTPS
+    tls:
+      certificateRefs:
+      - group: ''
+        kind: Secret
+        name: mobilebff-envoy-gateway-tls
+      mode: Terminate

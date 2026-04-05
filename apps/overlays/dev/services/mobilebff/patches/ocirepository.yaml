@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: mobilebff-chart-repo
+spec:
+  ref:
+    tag: "snapshot"

@@ -8,3 +8,5 @@ resources:
   - ./nix/imagepolicy-release.yaml
   - ./platform/imagerepository.yaml
   - ./platform/imagepolicy-release.yaml
+  - ./mobilebff/imagerepository.yaml
+  - ./mobilebff/imagepolicy-release.yaml

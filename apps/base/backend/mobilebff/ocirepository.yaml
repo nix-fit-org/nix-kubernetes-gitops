@@ -1,0 +1,14 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: mobilebff-chart-repo
+spec:
+  interval: 1h
+  url: oci://nix-docker.registry.twcstorage.ru/helm/apps/back/mobilebff
+  ref:
+    tag: "0.1.0000" # {"$imagepolicy": "flux-system:mobilebff-chart-release:tag"}
+  secretRef:
+    name: nix-docker-oci
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy

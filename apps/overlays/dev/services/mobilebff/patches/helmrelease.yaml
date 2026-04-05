@@ -1,0 +1,13 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: mobilebff
+spec:
+  valuesFrom:
+    - kind: ConfigMap
+      name: mobilebff-values
+      valuesKey: values.yaml
+    - kind: Secret
+      name: mobilebff-secrets-values
+      valuesKey: secrets.values.yaml

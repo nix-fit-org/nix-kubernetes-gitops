@@ -1,0 +1,19 @@
+---
+
+replicaCount: 1
+
+gateway:
+  enabled: true
+  httpRoute:
+    host: mobilebff-dev.nix-fit.ru
+
+app:
+  env:
+    Keycloak__Authority: http://keycloak.keycloak.svc.cluster.local:8080/realms/dev
+    Keycloak__PublicAuthority: https://auth-dev.nix-fit.ru/realms/dev
+    Keycloak__Audience: nix-fit-dev
+    Keycloak__RequireHttpsMetadata: "false"
+
+    Gateway__BaseUrl: http://platform.backend.svc.cluster.local:8080
+
+    Uct__Issuer: http://mobilebff.backend.svc.cluster.local:8080
