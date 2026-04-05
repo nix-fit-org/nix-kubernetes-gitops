@@ -1,0 +1,22 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: platform
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: platform-chart-repo
+  releaseName: platform
+  maxHistory: 5
+  timeout: 5m
+  install:
+    remediation:
+      retries: 1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 1
+      remediateLastFailure: true
+      strategy: rollback
