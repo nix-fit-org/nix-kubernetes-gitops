@@ -1,19 +1,15 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: keycloak
+namespace: envoy-gateway-system
 resources:
-  - ../../../../base/keycloak-infra
+  - ../../../../base/envoy-gateway
+commonAnnotations:
+  kustomize.toolkit.fluxcd.io/prune: "disabled"
 configMapGenerator:
-  - name: keycloak-infra-values
-    namespace: keycloak
+  - name: envoy-gateway-values
     files:
       - values.yaml
-secretGenerator:
-  - name: keycloak-infra-secrets-values
-    namespace: keycloak
-    files:
-      - secrets.values.yaml
 generatorOptions:
   disableNameSuffixHash: true
   labels:

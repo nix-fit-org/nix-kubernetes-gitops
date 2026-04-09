@@ -1,16 +1,10 @@
 ---
-- op: replace
-  path: /metadata/name
-  value: keycloak-infra
-- op: replace
-  path: /spec/releaseName
-  value: keycloak-infra
-- op: replace
-  path: /spec/chartRef/name
-  value: keycloak-infra-repo
-- op: add
-  path: /spec/valuesFrom
-  value:
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: keycloak-infra
+spec:
+  valuesFrom:
     - kind: ConfigMap
       name: keycloak-infra-values
       valuesKey: values.yaml

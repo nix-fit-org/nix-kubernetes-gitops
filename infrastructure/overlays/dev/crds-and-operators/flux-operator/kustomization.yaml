@@ -1,23 +1,26 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: keycloak
+namespace: flux-system
 resources:
-  - ../../../../base/keycloak-infra
+  - ../../../../base/flux-operator
+  - secret.yaml
 configMapGenerator:
-  - name: keycloak-infra-values
-    namespace: keycloak
+  - name: flux-operator-values
+    namespace: flux-system
     files:
       - values.yaml
 secretGenerator:
-  - name: keycloak-infra-secrets-values
-    namespace: keycloak
+  - name: flux-operator-secrets-values
+    namespace: flux-system
     files:
       - secrets.values.yaml
 generatorOptions:
   disableNameSuffixHash: true
   labels:
     reconcile.fluxcd.io/watch: Enabled
+commonAnnotations:
+  kustomize.toolkit.fluxcd.io/prune: "disabled"
 patches:
-  - path: patches/helmrelease.yaml
   - path: patches/ocirepository.yaml
+  - path: patches/helmrelease.yaml

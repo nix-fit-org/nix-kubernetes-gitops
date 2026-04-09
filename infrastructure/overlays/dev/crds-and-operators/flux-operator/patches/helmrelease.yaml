@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: keycloak
+  name: flux-operator
 spec:
   valuesFrom:
     - kind: ConfigMap
-      name: keycloak-values
+      name: flux-operator-values
       valuesKey: values.yaml
     - kind: Secret
-      name: keycloak-secrets-values
+      name: flux-operator-secrets-values
       valuesKey: secrets.values.yaml

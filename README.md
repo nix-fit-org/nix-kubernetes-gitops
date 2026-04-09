@@ -14,8 +14,14 @@ GitOps репозиторий для Flux v2. Управляет деплоем 
 │   ├── infrastructure.yaml
 │   └── flux-system/fluxinstance.yaml
 └── infrastructure/
-    ├── base/                        # Операторы и сервисы
-    └── overlays/{cluster}/          # Кластер-специфичные патчи
+    ├── base/                        # Базовые HelmRelease + OCIRepository
+    ├── overlays/{cluster}/
+    │   ├── namespaces/              # Namespaces + ServiceAccount
+    │   ├── rbac/                    # ClusterRole / ClusterRoleBinding
+    │   ├── crds-and-operators/      # HelmRelease операторов и их CRDs
+    │   ├── operator-configs/        # Конфигурация операторов (ClusterIssuer, Gateway и т.п.)
+    │   └── services/                # HelmRelease сервисов
+    └── image-automation/            # ImageRepository, ImagePolicy, ImageUpdateAutomation
 ```
 
 ## Кластеры
@@ -26,13 +32,13 @@ GitOps репозиторий для Flux v2. Управляет деплоем 
 
 ```
 namespaces
-└── rbac
-    └── base-operators
-        ├── infrastructure-image-update-automation
-        └── operators
-            └── infrastructure
-                ├── apps
-                └── apps-image-update-automation
+├── rbac
+└── crds-and-operators
+    ├── infrastructure-image-update-automation
+    └── operator-configs
+        └── infrastructure
+            ├── apps
+            └── apps-image-update-automation
 ```
 
 ## Image Automation
@@ -58,7 +64,11 @@ tag: "1.0.0000" # {"$imagepolicy": "flux-system:{app}-chart-release:tag"}
 CI пушит Helm чарт с тегом `{version}-snapshot` и дополнительно копирует его в мутабельный тег `:snapshot` через `skopeo copy`. OCIRepository на dev кластере жёстко указывает на тег `snapshot` — без ImagePolicy. Деплой инициируется через `flux reconcile helmrelease --with-source`, который форсирует перечитывание digest текущего тега.
 
 ```yaml
-# overlays/dev/services/{app}/patches/ocirepository.yaml
+# apps/overlays/dev/services/{app}/patches/ocirepository.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: {app}-chart-repo
 spec:
   ref:
     tag: "snapshot"

@@ -19,8 +19,5 @@ generatorOptions:
   labels:
     reconcile.fluxcd.io/watch: Enabled
 patches:
-  - target:
-      kind: HelmRelease
-      name: keycloak
-    path: patches/helmrelease.yaml
+  - path: patches/helmrelease.yaml
   - path: patches/ocirepository.yaml

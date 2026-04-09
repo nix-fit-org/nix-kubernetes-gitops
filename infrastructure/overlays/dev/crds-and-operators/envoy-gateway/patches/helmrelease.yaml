@@ -2,12 +2,9 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: keycloak
+  name: envoy-gateway
 spec:
   valuesFrom:
     - kind: ConfigMap
-      name: keycloak-values
+      name: envoy-gateway-values
       valuesKey: values.yaml
-    - kind: Secret
-      name: keycloak-secrets-values
-      valuesKey: secrets.values.yaml

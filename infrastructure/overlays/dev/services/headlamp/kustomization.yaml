@@ -20,7 +20,4 @@ generatorOptions:
   labels:
     reconcile.fluxcd.io/watch: Enabled
 patches:
-  - target:
-      kind: HelmRelease
-      name: headlamp
-    path: patches/helmrelease.yaml
+  - path: patches/helmrelease.yaml

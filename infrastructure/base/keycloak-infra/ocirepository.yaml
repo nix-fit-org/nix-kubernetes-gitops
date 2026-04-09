@@ -1,0 +1,14 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: keycloak-infra-repo
+spec:
+  interval: 1h
+  url: oci://nix-docker.registry.twcstorage.ru/helm/charts/keycloak
+  ref:
+    tag: "1.2.3" # {"$imagepolicy": "flux-system:keycloak-chart-release:tag"}
+  secretRef:
+    name: nix-docker-oci
+  layerSelector:
+    mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
+    operation: copy
